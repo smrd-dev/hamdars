@@ -1,0 +1,45 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+secrets/
+secrets.json
+*.secret
+*.pem
+*.key
+
+# Django local files
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+
+# Test and coverage artifacts
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Type checker and linter caches
+.mypy_cache/
+.pyre/
+.ruff_cache/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.code-workspace
+.DS_Store
+Thumbs.db

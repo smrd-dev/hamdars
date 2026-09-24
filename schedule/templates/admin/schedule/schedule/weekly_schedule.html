@@ -1,0 +1,81 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+
+<h1>برنامه هفتگی</h1>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>روز / زنگ</th>
+
+                {% for period in "12345678" %}
+                    <th>زنگ {{ period }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for day in grid %}
+                <tr>
+
+                    <th>
+                        {{ day.name }}
+                    </th>
+
+                    {% for cell in day.periods %}
+                        <td>
+
+                            <select name="{{ day.code }}_{{ cell.period }}">
+
+                                <option value="">
+                                    ---
+                                </option>
+
+                                {% for subject in subjects %}
+
+                                    <option
+                                        value="{{ subject.id }}"
+                                        {% if subject.id == cell.subject_id %}
+                                            selected
+                                        {% endif %}
+                                    >
+                                        {{ subject.subject_name }}
+                                    </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </td>
+                    {% endfor %}
+
+                    {# پنجشنبه فقط ۴ زنگ دارد #}
+
+                    {% if day.code == "thu" %}
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    {% endif %}
+
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+    <br>
+
+    <button type="submit" class="button default">
+        ذخیره برنامه
+    </button>
+
+</form>
+
+{% endblock %}

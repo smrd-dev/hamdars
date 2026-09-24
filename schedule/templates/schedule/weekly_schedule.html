@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>برنامه هفتگی</title>
+
+    <!-- Vazirmatn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            background: #f5f7fb;
+            color: #1f2937;
+            font-family: "Vazirmatn", sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* =========================
+           Header
+        ========================= */
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .header-copy {
+            flex: 1;
+        }
+
+        .header h1 {
+            margin: 0 0 8px;
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        .header p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 16px;
+            border: 1px solid rgba(37, 99, 235, 0.12);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.78);
+            color: #1d4ed8;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.08);
+            transition: 0.2s ease;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            background: #ffffff;
+            box-shadow: 0 10px 24px rgba(37, 99, 235, 0.14);
+        }
+
+
+        /* =========================
+           Desktop Table
+        ========================= */
+
+        .desktop-table {
+            display: block;
+            background: white;
+            border-radius: 18px;
+            overflow-x: auto;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e7eb;
+        }
+
+        table {
+            width: 100%;
+            min-width: 900px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 14px 10px;
+            text-align: center;
+            border-bottom: 1px solid #edf0f4;
+            border-left: 1px solid #edf0f4;
+        }
+
+        thead th {
+            background: #f8fafc;
+            color: #374151;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        thead th:first-child {
+            background: #111827;
+            color: white;
+            min-width: 120px;
+        }
+
+        tbody th {
+            background: #f8fafc;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        tbody tr:last-child th,
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        td {
+            min-width: 105px;
+            height: 80px;
+        }
+
+
+        /* =========================
+           Subject
+        ========================= */
+
+        .subject {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: 52px;
+            padding: 9px;
+
+            border-radius: 12px;
+
+            background: #f3f4f6;
+
+            font-weight: 600;
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+        .subject:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .empty {
+            color: #9ca3af;
+            background: #fafafa;
+            font-weight: 400;
+        }
+
+
+        /* =========================
+           Mobile
+        ========================= */
+
+        .mobile-days {
+            display: none;
+        }
+
+        .day-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .day-title {
+            padding: 15px 18px;
+            background: #111827;
+            color: white;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .lesson {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            min-height: 65px;
+            padding: 10px 16px;
+
+            border-bottom: 1px solid #edf0f4;
+        }
+
+        .lesson:last-child {
+            border-bottom: none;
+        }
+
+        .period {
+            width: 70px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .lesson-name {
+            flex: 1;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .mobile-empty {
+            color: #9ca3af;
+            font-weight: 400;
+        }
+
+
+        /* =========================
+           Mobile breakpoint
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 18px 12px;
+            }
+
+            .header {
+                margin-bottom: 18px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .header p {
+                font-size: 13px;
+            }
+
+            /* جدول دسکتاپ مخفی */
+            .desktop-table {
+                display: none;
+            }
+
+            /* کارت موبایل نمایش داده شود */
+            .mobile-days {
+                display: block;
+            }
+
+            .day-card {
+                border-radius: 16px;
+            }
+
+            .day-title {
+                padding: 14px 16px;
+                font-size: 16px;
+            }
+
+            .lesson {
+                min-height: 60px;
+                padding: 9px 14px;
+            }
+
+            .period {
+                width: 65px;
+                font-size: 12px;
+            }
+
+            .lesson-name {
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- =========================
+         Header
+    ========================= -->
+
+    <div class="header">
+
+        <div class="header-copy">
+
+            <h1>برنامه هفتگی</h1>
+
+            <p>
+                برنامه کلاس‌ها و درس‌های این هفته
+            </p>
+
+        </div>
+
+        <a href="{% url 'schedule:home' %}" class="back-button">
+            <span>→</span>
+            بازگشت به صفحه اصلی
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         DESKTOP
+    ====================================================== -->
+
+    <div class="desktop-table">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        روز / زنگ
+                    </th>
+
+                    {% for period in "12345678" %}
+
+                        <th>
+                            زنگ {{ period }}
+                        </th>
+
+                    {% endfor %}
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for day in grid %}
+
+                    <tr>
+
+                        <th>
+                            {{ day.name }}
+                        </th>
+
+
+                        {% for cell in day.periods %}
+
+                            <td>
+
+                                {% if cell.subject %}
+
+                                    <div class="subject">
+                                        {{ cell.subject.subject_name }}
+                                    </div>
+
+                                {% else %}
+
+                                    <div class="subject empty">
+                                        ---
+                                    </div>
+
+                                {% endif %}
+
+                            </td>
+
+                        {% endfor %}
+
+
+                        {% if day.code == "thu" %}
+
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        {% endif %}
+
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- =====================================================
+         MOBILE
+    ====================================================== -->
+
+    <div class="mobile-days">
+
+        {% for day in grid %}
+
+            <div class="day-card">
+
+
+                <div class="day-title">
+                    {{ day.name }}
+                </div>
+
+
+                {% for cell in day.periods %}
+
+                    <div class="lesson">
+
+
+                        <div class="period">
+                            زنگ {{ cell.period }}
+                        </div>
+
+
+                        <div class="lesson-name">
+
+                            {% if cell.subject %}
+
+                                {{ cell.subject.subject_name }}
+
+                            {% else %}
+
+                                <span class="mobile-empty">
+                                    بدون کلاس
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                    </div>
+
+                {% endfor %}
+
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+
+</div>
+
+</body>
+
+</html>

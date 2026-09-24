@@ -1,0 +1,148 @@
+{% extends "admin/base_site.html" %}
+
+{% load i18n %}
+
+
+{% block title %}
+    مدیریت وب‌گاه
+{% endblock %}
+
+
+{% block breadcrumbs %}{% endblock %}
+
+
+{% block content_title %}{% endblock %}
+
+
+{% block nav-sidebar %}{% endblock %}
+
+
+{% block extrastyle %}
+
+    {{ block.super }}
+
+    <style>
+        .dashboard {
+            padding: 10px 0 30px;
+        }
+
+        .app-section {
+            margin-bottom: 30px;
+        }
+
+        .app-title {
+            margin: 0 0 14px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px;
+        }
+
+        .model-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 20px;
+
+            border-radius: 18px;
+
+            text-decoration: none !important;
+
+            color: #111827 !important;
+
+            background: rgba(255, 255, 255, 0.72);
+
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            border: 1px solid rgba(255, 255, 255, 0.9);
+
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+
+            transition: 0.2s ease;
+        }
+
+        .model-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .model-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .model-arrow {
+            font-size: 20px;
+            opacity: 0.45;
+        }
+    </style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="dashboard">
+
+    {% for app in app_list %}
+
+        <section class="app-section">
+
+            <h2 class="app-title">
+                {% if app.app_label == "schedule" %}
+                    برنامه‌ریزی
+                {% elif app.app_label == "auth" %}
+                    کاربران و دسترسی‌ها
+                {% else %}
+                    {{ app.name }}
+                {% endif %}
+            </h2>
+
+            <div class="model-grid">
+
+                {% for model in app.models %}
+
+                    <a
+                        href="{{ model.admin_url }}"
+                        class="model-card"
+                    >
+
+                        <span class="model-name">
+                            {% if model.object_name == "Schedule" %}
+                                برنامه هفتگی
+                            {% elif model.object_name == "Subject" %}
+                                درس‌ها
+                            {% elif model.object_name == "User" %}
+                                کاربران
+                            {% elif model.object_name == "Group" %}
+                                گروه‌ها
+                            {% else %}
+                                {{ model.name }}
+                            {% endif %}
+                        </span>
+
+                        <span class="model-arrow">
+                            ←
+                        </span>
+
+                    </a>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
